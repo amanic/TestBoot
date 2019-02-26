@@ -10,17 +10,36 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.ProxyAsyncConfiguration;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 @EnableMyConfig
 @EnableLog(packages = "com.cht.testspringboot")
+@EnableAsync
 public class TestSpringbootApplication {
 
     @Bean
     public Runnable createRunnable(){
-        return () -> System.out.println("spring boot is running");
+        return new Runnable(){
+
+            @Override
+            @Async
+            public void run() {
+                try{
+                    for (int i = 0; i <10 ; i++) {
+                        System.out.println("============"+i);
+                        TimeUnit.SECONDS.sleep(1);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        };
     }
 
     public static void main(String[] args) {
@@ -33,6 +52,7 @@ public class TestSpringbootApplication {
         System.out.println(context.getBean(Cat.class).getName());
         System.out.println(context.getBean(Elephant.class));
         System.out.println(context.getBean(Dog.class));
+        System.out.println(context.getBean(ProxyAsyncConfiguration.class));
 //        System.out.println();
 
     }
