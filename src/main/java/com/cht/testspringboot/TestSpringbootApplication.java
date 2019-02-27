@@ -4,6 +4,7 @@ import com.cht.testspringboot.bean.Cat;
 import com.cht.testspringboot.bean.Dog;
 import com.cht.testspringboot.bean.Elephant;
 import com.cht.testspringboot.bean.User;
+import com.cht.testspringboot.configuration.EmailEvent;
 import com.cht.testspringboot.configuration.EnableLog;
 import com.cht.testspringboot.configuration.EnableMyConfig;
 import org.springframework.boot.SpringApplication;
@@ -53,6 +54,8 @@ public class TestSpringbootApplication {
         System.out.println(context.getBean(Elephant.class));
         System.out.println(context.getBean(Dog.class));
         System.out.println(context.getBean(ProxyAsyncConfiguration.class));
+        EmailEvent event = new EmailEvent("hello","abc@163.com","This is a test");
+        context.publishEvent(event);
 //        System.out.println();
 
     }
