@@ -22,38 +22,8 @@ import java.util.Set;
 public class CORESFilter implements Filter {
     private final Set<String> ALLOWED_DOMAINS = new HashSet<String>() {
         {
-            add(".weidai.com.cn");
-            add(".wd5.com.cn");
-            add(".wdai.com");
-            add(".wdgood.cn");
-            add(".weidai.work");
-            add(".wdtest.cc");
-            add(".wddev.cc");
-            //add("192.168.91.229");
-            add("192.168.2.215");
-            add("192.168.90.49");
-            add("192.168.91.65");
-            add("192.168.91.204");
-            add("192.168.91.166");
-            add("192.168.92.203");
-            add("192.168.90.192");
-            add("192.168.2.119");
-            add("0.0.0.0");
-            add("localhost");
-            add("172.20.10.2");
-            add(".weidaixd.com");
-            add("192.168.90.97");
-            add("clapp-app.wdai.com");
-            add("47.95.6.88");
-            add("192.168.0.103");
-            add("192.168.91.235");
-            add("192.168.90.92");
-            add("192.168.91.68");
-            add("192.168.91.228");
-            add("192.168.90.246");
-            add("192.168.91.193");
-            add("192.168.90.219");
-            add("192.168.90.197");
+
+            add("baidu.com");
 
 
         }
