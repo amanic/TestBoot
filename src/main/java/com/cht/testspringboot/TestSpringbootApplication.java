@@ -4,6 +4,7 @@ import com.cht.testspringboot.bean.Cat;
 import com.cht.testspringboot.bean.Dog;
 import com.cht.testspringboot.bean.Elephant;
 import com.cht.testspringboot.bean.User;
+import com.cht.testspringboot.configuration.ApplicationContextInitializerImpl;
 import com.cht.testspringboot.configuration.EmailEvent;
 import com.cht.testspringboot.configuration.EnableLog;
 import com.cht.testspringboot.configuration.EnableMyConfig;
@@ -44,7 +45,9 @@ public class TestSpringbootApplication {
     }
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(TestSpringbootApplication.class,args);
+        SpringApplication springApplication = new SpringApplication(TestSpringbootApplication.class);
+        springApplication.addInitializers(new ApplicationContextInitializerImpl());
+        ConfigurableApplicationContext context = springApplication.run(args);
         context.getBean(Runnable.class).run();
         System.out.println(context.getBean(User.class));
         Map map = (Map) context.getBean("createMap");
