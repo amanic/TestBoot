@@ -13,8 +13,11 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 public class AnotherArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
-        System.out.println("AnotherArgumentResolver.supportsParameter");
-        return true;
+        System.out.println("自定义AnotherArgumentResolver传参处理器接受参数类型："+methodParameter.getParameterType().getName());
+        if(methodParameter.getMethod().getName().equals("test1")){
+            return true;
+        }
+        return false;
     }
 
     @Override

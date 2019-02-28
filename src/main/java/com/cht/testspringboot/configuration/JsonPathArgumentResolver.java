@@ -14,7 +14,10 @@ public class JsonPathArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
         System.out.println("自定义传参处理器接受参数类型："+methodParameter.getParameterType().getName());
-        return true;
+        if(methodParameter.getMethod().getName().equals("test1")){
+            return true;
+        }
+        return false;
     }
 
     @Override
