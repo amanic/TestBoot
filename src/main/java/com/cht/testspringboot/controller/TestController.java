@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @RequestMapping("t1")
-    public String test1(){
-        return "/test/t1";
+    public String test1(String s){
+        return s;
     }
 }
