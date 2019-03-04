@@ -20,6 +20,9 @@ public class DemoTest implements Serializable {
     {
     }
 
+    static {
+        System.out.println("执行静态代码块。。。");
+    }
     public DemoTest(String name, int age)
     {
         this.name = name;

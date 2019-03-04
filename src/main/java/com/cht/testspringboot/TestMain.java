@@ -19,7 +19,7 @@ public class TestMain {
 //            test2();
 //            testString();
 //            new Son();
-            test7();
+            test1();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,6 +59,15 @@ public class TestMain {
      * @date 2019-02-26
      */
     public static void test1() throws Exception {
+
+        /**
+         * java中class.forName()和classLoader都可用来对类进行加载。
+         * class.forName()前者除了将类的.class文件加载到jvm中之外，还会对类进行解释，执行类中的static块。
+         * 而classLoader只干一件事情，就是将.class文件加载到jvm中，不会执行static中的内容,只有在newInstance才会去执行static块。
+         * Class.forName(name, initialize, loader)带参函数也可控制是否加载static块。并且只有调用了newInstance()方法采用调用构造函数，创建类的对象
+         */
+        Class<?> aClass = ClassLoader.getSystemClassLoader().loadClass("com.cht.testspringboot.bean.DemoTest");
+        System.out.println(aClass.getName());
 
         //获取类DemoTest的Class对象
         Class<?> c = Class.forName("com.cht.testspringboot.bean.DemoTest");
