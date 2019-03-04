@@ -19,7 +19,7 @@ public class TestMain {
 //            test2();
 //            testString();
 //            new Son();
-            test6();
+            test7();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -195,6 +195,46 @@ public class TestMain {
             map.put("4","d");
             Map.Entry<String,String> next = iterator.next();
             System.out.println(next.getKey() + " => " + next.getValue());
+        }
+    }
+
+    public static void test7(){
+        TestI testI = new TestI();
+        for (int i = 0; i < 10; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (int j = 0; j < 1000; j++) {
+                        testI.inc();
+                    }
+
+                }
+            }).start();
+        }
+
+        while(Thread.activeCount()>2){
+            System.out.println(Thread.activeCount());
+            Thread.yield();
+        }  //保证前面的线程都执行完
+        System.out.println(testI.getI()+"-"+Thread.activeCount());
+
+    }
+
+
+    static class TestI{
+        private  int i = 0;
+
+        public synchronized void inc(){
+
+            i++;
+        }
+
+        public int getI() {
+            return i;
+        }
+
+        public void setI(int i) {
+            this.i = i;
         }
     }
 
