@@ -2,6 +2,10 @@ package com.cht.testspringboot;
 
 import com.cht.testspringboot.bean.DemoTest;
 import com.cht.testspringboot.bean.Son;
+import com.cht.testspringboot.configuration.CGLibProxy;
+import com.cht.testspringboot.configuration.JDKProxy;
+import com.cht.testspringboot.service.UserManager;
+import com.cht.testspringboot.service.impl.UserManagerImpl;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -23,6 +27,7 @@ public class TestMain {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        TestI i = new TestI();
     }
 
     /**
@@ -245,6 +250,20 @@ public class TestMain {
         public void setI(int i) {
             this.i = i;
         }
+    }
+
+    public static void test8() {
+        UserManager userManagerCGLIB = (UserManager) new CGLibProxy()
+                .createProxyObject(new UserManagerImpl());
+        System.out.println("-----------CGLibProxy-------------");
+        userManagerCGLIB.addUser("tom", "root");
+// 遗留问题：动态代理更加灵活，https://blog.csdn.net/m0_38138387/article/details/79094565 交易中介类比。
+        //但是像dubbo这种调用，使用代理吗？那这里new出来的对象是哪里来的？
+
+        System.out.println("-----------JDKProxy-------------");
+        UserManager userManagerJDK = (UserManager) new JDKProxy()
+                .newProxy(new UserManagerImpl());
+        userManagerJDK.addUser("tom", "root");
     }
 
 }
