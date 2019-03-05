@@ -23,7 +23,7 @@ public class TestMain {
 //            test2();
 //            testString();
 //            new Son();
-            test1();
+            test9();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -264,6 +264,19 @@ public class TestMain {
         UserManager userManagerJDK = (UserManager) new JDKProxy()
                 .newProxy(new UserManagerImpl());
         userManagerJDK.addUser("tom", "root");
+    }
+
+    public static void test9() throws Exception {
+        Class cache = Integer.class.getDeclaredClasses()[0]; //1
+        Field myCache = cache.getDeclaredField("cache"); //2
+        myCache.setAccessible(true);//3
+
+        Integer[] newCache = (Integer[]) myCache.get(cache); //4
+        newCache[132] = newCache[13]; //5
+
+        int a = 2;
+        int b = a + a;
+        System.out.printf("%d + %d = %d", a, a, b); //
     }
 
 }
