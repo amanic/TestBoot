@@ -23,7 +23,8 @@ public class TestMain {
 //            test2();
 //            testString();
 //            new Son();
-            test9();
+//            test9();
+            test10();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -277,6 +278,36 @@ public class TestMain {
         int a = 2;
         int b = a + a;
         System.out.printf("%d + %d = %d", a, a, b); //
+    }
+
+    /**
+     * 这里测试一下，foreach为什么不能和remove、add一起使用，因为编译之后其实是一个迭代器，如果是concurrentHashMap才能让迭代器和remove、add操作一起使用
+     * 有一个fail-fast原则。
+     * 并且注意一下fori和remove、add操作一起使用容易出现的bug。
+     * 并且，注意一下foreach是新赋值一个变量
+     */
+    public static void test10() {
+        List<String> s = new ArrayList<>();
+        s.add("1");
+        s.add("1");
+        s.add("2");
+        s.add("3");
+        s.add("4");
+        for (int i = 0; i < s.size(); i++) {
+            if(s.get(i).equals("1")){
+                s.remove("1");
+            }
+        }
+        for (int i = 0; i < s.size(); i++) {
+            System.out.println(s.get(i));
+        }
+
+
+        for(String ss : s){
+            System.out.println(ss);
+        }
+
+        s.forEach((s1)-> System.out.println(s1+"-"));
     }
 
 }
