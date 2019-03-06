@@ -14,6 +14,7 @@ public class MyServletContext implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         sce.getServletContext().setAttribute("attribute","value");
+        System.out.println("ServletContextListener初始化完成。。。");
     }
 
     @Override
