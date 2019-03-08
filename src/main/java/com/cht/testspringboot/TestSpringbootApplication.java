@@ -8,6 +8,7 @@ import com.cht.testspringboot.configuration.ApplicationContextInitializerImpl;
 import com.cht.testspringboot.configuration.EmailEvent;
 import com.cht.testspringboot.configuration.EnableLog;
 import com.cht.testspringboot.configuration.EnableMyConfig;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.ProxyAsyncConfiguration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -23,6 +25,8 @@ import java.util.concurrent.TimeUnit;
 @EnableMyConfig
 @EnableLog(packages = "com.cht.testspringboot")
 @EnableAsync
+@MapperScan(value = "com.cht.testspringboot.dal")
+@EnableTransactionManagement
 public class TestSpringbootApplication {
 
     @Bean

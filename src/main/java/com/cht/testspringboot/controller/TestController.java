@@ -2,6 +2,7 @@ package com.cht.testspringboot.controller;
 
 import com.cht.testspringboot.bean.TestConverterObj;
 import com.cht.testspringboot.configuration.ServletContextHolder;
+import com.cht.testspringboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,9 @@ public class TestController {
     @Autowired
     ServletContextHolder servletContextHolder;
 
+    @Autowired
+    UserService userService;
+
     @RequestMapping("t1")
     public String test1(@RequestAttribute(value = "s") String s) {
         return s;
@@ -48,5 +52,10 @@ public class TestController {
     @RequestMapping(value = "t2", produces = "application/x-cht")
     public TestConverterObj test2(Integer i, String s) {
         return new TestConverterObj(i, s);
+    }
+
+    @RequestMapping("t4")
+    public Object test4(Integer i){
+        return userService.getOne(i);
     }
 }
