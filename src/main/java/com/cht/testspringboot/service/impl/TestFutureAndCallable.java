@@ -8,7 +8,8 @@ import java.util.concurrent.*;
  */
 public class TestFutureAndCallable {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
         ExecutorService executor = Executors.newCachedThreadPool();
         Task task = new Task();
         Future<Integer> result = executor.submit(task);
@@ -35,10 +36,12 @@ public class TestFutureAndCallable {
             try {
                 //这里估计会阻塞到result可以get位置
                 System.out.println(result.get());
+                countDownLatch.countDown();
             } catch (Exception e) {
                 System.out.println("出错了。。。"+e);
             }
         }).start();
+        countDownLatch.await();
         System.out.println("所有任务执行完毕");
     }
 
