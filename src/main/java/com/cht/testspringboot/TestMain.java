@@ -24,7 +24,14 @@ public class TestMain {
 //            testString();
 //            new Son();
 //            test9();
-            test10();
+//            test10();
+            List<Integer> integers = new ArrayList<>();
+            Integer i = new Integer(1);
+            integers.add(i);
+            i=null;
+            System.out.println(integers.get(0));
+            System.gc();
+            System.out.println(integers.get(0));
         } catch (Exception e) {
             e.printStackTrace();
         }
