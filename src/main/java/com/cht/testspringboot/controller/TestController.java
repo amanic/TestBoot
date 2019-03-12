@@ -4,6 +4,7 @@ import com.cht.testspringboot.bean.TestConverterObj;
 import com.cht.testspringboot.configuration.ServletContextHolder;
 import com.cht.testspringboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @auther chen.haitao
@@ -32,6 +34,10 @@ public class TestController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    @Qualifier("buildConsumerQueueThreadPool")
+    ExecutorService executorService;
 
     @RequestMapping("t1")
     public String test1(@RequestAttribute(value = "s") String s) {
@@ -57,5 +63,43 @@ public class TestController {
     @RequestMapping("t4")
     public Object test4(Integer i){
         return userService.getOne(i);
+    }
+
+    @RequestMapping("t5")
+    public Object test5(){
+        for (int i = 0; i < 10; i++) {
+            final int a = i;
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println(a);
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+        }
+        executorService.shutdown();
+        return "SUCCESS";
+    }
+
+    @RequestMapping("t6")
+    public Object test6(){
+        for (int i = 0; i < 10; i++) {
+            final int a = i;
+            new Thread(()-> {
+                System.out.println(a);
+                try {
+                    Thread.sleep(2000);
+                    System.out.println(a);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+        return "SUCCESS";
     }
 }

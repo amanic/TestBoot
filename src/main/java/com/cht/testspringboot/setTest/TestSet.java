@@ -1,5 +1,6 @@
 package com.cht.testspringboot.setTest;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +36,9 @@ public class TestSet {
         map.put(b,"b");
         map.put(c,"c");
         System.out.println(map);
+        Map<A, String> unmodifiableMap = Collections.unmodifiableMap(map);
+        unmodifiableMap.put(new A(10,10),"new");
+        System.out.println(unmodifiableMap);
 
     }
 
