@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @auther chen.haitao
  * @date 2019-02-27
  */
-@Component
+//@Component
 public class EmailNotifier implements ApplicationListener {
 
     public void onApplicationEvent(ApplicationEvent event) {

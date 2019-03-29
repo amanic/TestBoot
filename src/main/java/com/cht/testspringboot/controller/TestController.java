@@ -2,6 +2,7 @@ package com.cht.testspringboot.controller;
 
 import com.cht.testspringboot.bean.TestConverterObj;
 import com.cht.testspringboot.configuration.ServletContextHolder;
+import com.cht.testspringboot.mongodbTest.WeChatMessageRepository;
 import com.cht.testspringboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,6 +39,9 @@ public class TestController {
     @Autowired
     @Qualifier("buildConsumerQueueThreadPool")
     ExecutorService executorService;
+
+    @Autowired
+    WeChatMessageRepository weChatMessageRepository;
 
     @RequestMapping("t1")
     public String test1(@RequestAttribute(value = "s") String s) {
@@ -101,5 +105,11 @@ public class TestController {
             }).start();
         }
         return "SUCCESS";
+    }
+
+    @RequestMapping("t7")
+    public void test7(){
+//        System.out.println("weChatMessageRepository.findAll().size() = "+weChatMessageRepository.findAll().size());
+        System.out.println(weChatMessageRepository.findLastByTo("server"));
     }
 }

@@ -8,3 +8,14 @@ spring:
     url: jdbc:mysql://39.108.144.11:3306/haron?useUnicode=true&characterEncoding=utf-8
     username: root
     password: root
+  data:
+    mongodb:
+      uri: mongodb://url:port/im_wechat
+      option:
+        min-connection-per-host: 0
+        max-connection-per-host: 100
+        threads-allowed-to-block-for-connection-multiplier: 10
+        connect-timeout: 2000
+        max-wait-time: 3000
+        socket-keep-alive: true
+        socket-timeout: 3000
