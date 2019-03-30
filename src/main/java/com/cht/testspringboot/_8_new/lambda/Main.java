@@ -1,5 +1,7 @@
 package com.cht.testspringboot._8_new.lambda;
 
+import org.springframework.core.convert.converter.Converter;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import java.util.List;
  */
 public class Main {
 
+    static int anum = 0;
     public static void main(String[] args) {
 
 /**
@@ -99,6 +102,33 @@ public class Main {
 
         peopleList.forEach((peo) -> System.out.print(peo+"-"));
 
+        GreetingMethod greetingMethod = (s)->{
+            System.out.println("hello "+s);
+        };
 
+        GreetingMethod greetingMethod1 = (s)->{
+            System.out.println("hi "+s);
+        };
+
+        GreetingMethod greetingMethod2 = new GreetingMethod() {
+            @Override
+            public void greet(String content) {
+
+            }
+        };
+
+        System.out.println();
+        int num = 1;
+        Converter<Integer,String> converter = (a)->{return a+anum+"";};
+        String s = converter.convert(1);
+        System.out.println("converter之后的字符串是："+s);
+        anum++;
+        System.out.println(anum);
+
+    }
+
+
+    interface GreetingMethod{
+        void greet(String content);
     }
 }

@@ -4,6 +4,7 @@ package com.cht.testspringboot._8_new;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 /**方法引用
@@ -56,6 +57,22 @@ public class methodUse {
         Arrays.sort(persons3, Person::compareTo);
         System.out.print("排序后: ");
         printArray(persons3);
+
+        do1(1,"2",(i,s)->{
+            if(i>Integer.valueOf(s)){
+                return true;
+            }
+            return false;
+        });
+
+        do1(4,"2",(i,s)->{
+            if(i>Integer.valueOf(s)){
+                return true;
+            }
+            return false;
+        });
+
+
     }
 
     public static void printArray(Person[] persons) {
@@ -101,6 +118,18 @@ public class methodUse {
 
         public Person getPerson() {
             return supplier.get();
+        }
+    }
+
+
+
+
+
+    public static void do1(Integer i, String s, BiFunction<Integer,String,Boolean> biFunction){
+        if(biFunction.apply(i,s)){
+            System.out.println("正确。。。");
+        }else {
+            System.out.println("错误。。。");
         }
     }
 }
