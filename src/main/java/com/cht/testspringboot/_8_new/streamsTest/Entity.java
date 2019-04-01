@@ -1,0 +1,53 @@
+package com.cht.testspringboot._8_new.streamsTest;
+
+/**
+ * @auther chen.haitao
+ * @date 2019-04-01
+ */
+public class Entity {
+
+    private Integer id;
+
+    private String name;
+
+    private String remark;
+
+    public Entity(Integer id, String name, String remark) {
+        this.id = id;
+        this.name = name;
+        this.remark = remark;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    @Override
+    public String toString() {
+        return "Entity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
+}
